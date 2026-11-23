@@ -1,0 +1,56 @@
+name: Success report
+description: The English UI firmware flashed and works. Please tell us your setup.
+title: "[Success] "
+labels: ["report", "success"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you. Every confirmed success moves this from "experimental" towards "known to work".
+  - type: input
+    id: unit
+    attributes:
+      label: Pedal
+      description: Model, region/market it was bought for, firmware before patching
+      placeholder: GP-150, Chinese market, V1.1.1
+    validations:
+      required: true
+  - type: input
+    id: computer
+    attributes:
+      label: Computer and OS
+      placeholder: MacBook Air M2, macOS 15.1 / Windows 11 23H2
+    validations:
+      required: true
+  - type: input
+    id: suite
+    attributes:
+      label: Valeton Suite version
+      placeholder: 2.1.0
+  - type: dropdown
+    id: connection
+    attributes:
+      label: USB connection
+      options:
+        - Cable straight into the computer
+        - Through a hub, dock or adapter
+    validations:
+      required: true
+  - type: dropdown
+    id: control
+    attributes:
+      label: Did you flash the stock file first as a control test?
+      options:
+        - "Yes, stock flashed fine"
+        - "No, went straight to the patched file"
+  - type: textarea
+    id: result
+    attributes:
+      label: What you see on the pedal
+      description: Are all menus English? Anything still Chinese, cut off, or odd? Does the Language menu behave as described?
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Time the update took, warnings, tips for others

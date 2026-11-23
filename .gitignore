@@ -1,0 +1,6 @@
+# Never commit Valeton firmware (stock or patched)
+*.bin
+*.zip
+__pycache__/
+*.pyc
+.DS_Store

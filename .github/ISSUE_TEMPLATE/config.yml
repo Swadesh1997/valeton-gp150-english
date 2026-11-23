@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Container format and tooling questions
+    url: https://github.com/egorcipa8-debug/gp150-htfw
+    about: The HTFW container, CRC and LZO findings this patch builds on live there.

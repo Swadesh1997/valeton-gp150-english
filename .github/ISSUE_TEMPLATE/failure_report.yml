@@ -1,0 +1,89 @@
+name: Failure report
+description: The update stalled, was refused, or the pedal misbehaved afterwards.
+title: "[Failure] "
+labels: ["report", "failure"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **First, make sure your pedal is safe.** If it does not boot: switch it off, hold A + B + PARA, switch on, and flash the stock V1.1.1 file from Valeton Suite.
+        Then please fill this in. Failure reports are as valuable as successes.
+  - type: input
+    id: unit
+    attributes:
+      label: Pedal
+      placeholder: GP-150, Chinese market, V1.1.1
+    validations:
+      required: true
+  - type: input
+    id: computer
+    attributes:
+      label: Computer and OS
+      placeholder: MacBook Pro 2021, macOS 14.6 / Windows 11
+    validations:
+      required: true
+  - type: input
+    id: suite
+    attributes:
+      label: Valeton Suite version
+  - type: dropdown
+    id: connection
+    attributes:
+      label: USB connection
+      options:
+        - Cable straight into the computer
+        - Through a hub, dock or adapter
+    validations:
+      required: true
+  - type: dropdown
+    id: control
+    attributes:
+      label: Did the STOCK V1.1.1 file flash successfully with the same setup?
+      description: This is the single most useful piece of information.
+      options:
+        - "Yes, stock flashes fine, only the patched file fails"
+        - "No, stock fails the same way"
+        - "Did not try"
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where did it fail?
+      options:
+        - Valeton Suite refused the file before starting
+        - Main progress bar stopped partway
+        - Second phase ("BT And PD Updating") stopped
+        - Update finished but pedal does not boot or misbehaves
+        - Other (describe below)
+    validations:
+      required: true
+  - type: input
+    id: percent
+    attributes:
+      label: Progress bar percentage when it stopped (if it did)
+      placeholder: about 40%
+  - type: dropdown
+    id: repeat
+    attributes:
+      label: Did it stop at the same place on a second attempt?
+      options:
+        - "Yes, same place"
+        - "No, a different place"
+        - "Only tried once"
+  - type: textarea
+    id: details
+    attributes:
+      label: What happened, step by step
+      description: Any error text, what the pedal screen showed, whether recovery mode worked
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Valeton Suite log (optional)
+      description: |
+        Windows: `%TEMP%\HTCache\logfile.txt`
+        macOS: run `find /tmp "$TMPDIR" ~/Library -iname 'logfile.txt' -path '*HTCache*' 2>/dev/null`
+        Paste the last 100 lines or attach the file.
+      render: text
