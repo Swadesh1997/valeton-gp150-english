@@ -65,64 +65,60 @@ SHA-256 206e120d44b6c66fe9aaa5b56893be146fd0a9fd0ee1d3a4d13054d61abc68bf
 
 If anything does not match, it writes nothing and tells you why.
 
-### 2. Back up and prepare
+### 2. Follow the flashing procedure
 
-- Back up your presets in Valeton Suite.
-- Keep the stock zip. It is your way back.
-- Learn the recovery combination below before you start.
+**Read [FLASHING.md](FLASHING.md) in full before you flash anything.** It is
+built as a set of go/no-go gates:
 
-### 3. Control test with the stock file first (recommended)
+| Gate | What it establishes |
+|---|---|
+| 0 | the recovery combination works on **your** unit (checked without flashing) |
+| 1 | your stock file is the exact one this patch was made for |
+| 2 | presets backed up, stock zip kept |
+| 3 | the **stock** file flashes and boots cleanly with your computer, cable and port |
+| 4 | the patched file was produced by the script and matches the published hash |
+| 5 | the patched file is flashed with the same setup, in the same session |
 
-Flash the **stock** V1.1.1 file with the same computer, cable and port you will
-use for the patched file. This is the file your pedal already runs, so it adds
-no new risk, and it tells you whether your setup can complete an update at all.
-If stock stalls, fix the link (cable, port, computer) before trying the patch.
+If the stock firmware does not flash and boot cleanly, the patched firmware
+must not be attempted. FLASHING.md also explains what each kind of failure
+means, how to tell a USB drop from the pedal refusing data, and which logs to
+collect on macOS and Windows, with each statement marked as confirmed,
+evidence-based or hypothesis.
 
-### 4. Flash the English file
+### 3. Report back
 
-Setup that matters for a 17 MB transfer over USB-MIDI:
-
-- Pedal on **mains power**, not battery.
-- Cable **straight into the computer**. No hub, dock, monitor port or adapter.
-- Valeton Suite in the foreground, laptop lid open and on charger.
-- Quit DAWs, Audio MIDI Setup, and browser tabs that use WebMIDI.
-- **Windows 11** needs Valeton's driver fix first: Device Manager, Sound video
-  and game controllers, right-click the GP-150, Update driver, Browse my
-  computer, Let me pick, choose **USB Audio Device**.
-  ([Valeton notice](https://www.valeton.net/win11-technical-notice/))
-- Do not touch anything until the second phase ("BT And PD Updating") has
-  finished and the pedal has rebooted by itself.
-
-Then: Valeton Suite, firmware update, choose
-`GP-150 Firmware V1.1.1 - English UI.bin`.
-
-### 5. Report back
-
-Open an issue using the **Success report** or **Failure report** template.
-Please include your computer and OS, Suite version, where the progress bar
-stopped if it did, and the Suite log if you can find it (see templates).
+Open an issue using the **Success report** or **Failure report** template,
+whatever the outcome. The templates ask for the details that actually
+distinguish causes (did stock flash on the same setup, stall percentage, same
+place twice, logs).
 
 ## Recovery mode
 
-If the pedal does not boot or the update fails:
+With the pedal **off**, hold **A + B + PARA**, switch it **on**, then flash the
+**stock** file from Valeton Suite.
 
-1. Switch the pedal **off**.
-2. Hold **A + B + PARA** and switch it **on**.
-3. In Valeton Suite, flash the **stock** `GP-150 Firmware V1.1.1.bin`.
-
-This bootloader mode lives in a flash area the update never touches. Users
-running custom GP-150/GP-180 firmware report flashing and rolling back many
-times this way.
+What is known about this, precisely: the bootloader lives in flash below the
+first region any update writes, so a failed update cannot remove it
+(confirmed from the file's section table). The A + B + PARA combination itself
+is published by an independent developer whose GP-150 firmware has been
+user-tested, follows the same pattern Valeton documents for the GP-200, and has
+**not** been found by us in Valeton's own GP-150 documentation. That is why
+FLASHING.md asks you to confirm it on your unit, without flashing, before
+anything else.
 
 ## Risks
 
-- Any firmware change can leave a device unusable. This one changes only
-  pointer data and two labels, and leaves the model string and version label
-  alone, which are the two things the pedal is known to check. The risk is
-  low but not zero, and it has **not** yet been proven on a real unit.
-- In practice this voids the warranty.
+- Any firmware change can leave a device unusable. This one changes 448 bytes
+  of pointer data and two labels inside one region, and leaves the model
+  string and version label alone, which are the two things the updater is
+  known to check. The risk is low but not zero, and it has **not** yet been
+  proven on a real unit.
 - The one hardware-confirmed rebuild with the same toolchain changed a graphics
   region, not the code/data region this patch touches.
+- The single attempt so far (macOS, over USB) stopped partway through the main
+  progress bar. No control test and no logs were taken, so it distinguishes
+  nothing. FLASHING.md is written so the next attempt does.
+- In practice this voids the warranty.
 
 ## Known limits
 
