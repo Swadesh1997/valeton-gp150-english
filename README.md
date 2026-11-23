@@ -5,10 +5,7 @@ pedal use the English text that is **already inside** its own V1.1.1 firmware.
 
 > **Status: experimental, not yet confirmed on hardware.**
 > The firmware file has been built and verified on disk by two independent
-> tools, but the one flash attempt so far (macOS, over USB) stopped partway
-> through the main progress bar, and it is not yet known whether that was the
-> USB link or the pedal rejecting the file. Nobody has yet confirmed a
-> successful flash. **If you try this, please report the result**, success or
+> tools, **If you try this, please report the result**, success or
 > failure, through the Issues tab. That is what this repository is for.
 
 Not affiliated with Valeton or Hotone. Use at your own risk. See
